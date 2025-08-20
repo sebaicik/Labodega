@@ -1,0 +1,55 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr; /* móvil: una columna */
+  grid-template-rows: auto;
+  grid-template-areas:
+    "header"
+    "inicio"
+    "nosotros"
+    "vinos"
+    "carrito"
+    "footer";
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+/* Asignación de grid areas a cada sección */
+header {
+  grid-area: header;
+}
+
+#inicio {
+  grid-area: inicio;
+}
+
+#nosotros {
+  grid-area: nosotros;
+}
+
+#vinos {
+  grid-area: vinos;
+}
+
+#carrito {
+  grid-area: carrito;
+}
+
+footer {
+  grid-area: footer;
+}
+
+/* MEDIA QUERY para desktop: dos columnas en algunas secciones */
+@media (min-width: 769px) {
+  .grid-container {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "header header"
+      "inicio inicio"
+      "nosotros vinos"
+      "carrito carrito"
+      "footer footer";
+    padding: 20px 40px;
+  }
+}
