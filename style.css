@@ -1,13 +1,6 @@
-CSS
+/* ===== RESET Y BASE ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* ===== RESET GENERAL ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* ===== GENERAL ===== */
 body {
   font-family: 'Roboto', sans-serif;
   background-color: #f5f7f9;
@@ -15,337 +8,50 @@ body {
   line-height: 1.5;
 }
 
-img {
-  max-width: 100%;
+img { max-width: 100%; height: auto; display: block; }
+
+/* ===== NAVBAR ===== */
+.navbar .nav-link { font-weight: 500; color: #000; }
+.navbar .nav-link:hover, .navbar .nav-link:focus { color: #6c63ff; }
+.navbar-brand .logo { width: 40px; height: auto; }
+
+/* ===== HERO ===== */
+.hero h1 { font-size: 2.25rem; font-weight: bold; }
+.hero .lead { color: #555; }
+.hero-img {
+  max-width: 500px;   /* limita tamaño en desktop */
+  width: 100%;        /* mantiene responsive */
   height: auto;
-}
-
-/* ===== HEADER ===== */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 32px;
-  background-color: #fff;
-  border-bottom: 1px solid #ddd;
-}
-
-.nav-left a {
-  margin: 0 12px;
-  text-decoration: none;
-  color: #000;
-  font-weight: 500;
-}
-
-.logo {
-  width: 40px;
-  margin-right: 16px;
-}
-
-/* ===== HERO (INICIO) ===== */
-.hero {
-  text-align: center;
-  padding: 40px 20px;
-}
-
-.titulo-logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-}
-
-.titulo-logo h1 {
-  font-size: 28px;
-}
-
-.vinos {
-  margin-top: 20px;
-  max-width: 300px;
-}
-
-/* ===== NOSOTROS ===== */
-.contenido {
-  padding: 40px 20px;
-  max-width: 800px;
   margin: 0 auto;
 }
 
-.contenido h2 {
-  text-transform: lowercase;
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-/* ===== VINOS ===== */
-.catalogo {
-  padding: 40px 20px;
-}
-
-.catalogo h2 {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.grid-vinos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 24px;
-}
-
-.vino-img {
-  width: 100%;
-  height: 200px;
-  background-size: cover;
-  background-position: center;
-  border-radius: 8px;
-  margin-bottom: 8px;
-}
-
-.vino-nombre {
+/* ===== ABOUT US ===== */
+#nosotros h2 {
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
   font-weight: bold;
 }
 
-.vino-precio {
-  color: #555;
-}
-
-.vino-destacado img {
-  width: 100%;
-  max-height: 400px;
-  object-fit: cover;
-  margin-bottom: 32px;
-}
+/* ===== CARDS (Vinos) ===== */
+.card { border: 1px solid #eee; border-radius: 8px; transition: transform .15s ease-in-out; }
+.card:hover { transform: translateY(-4px); }
+.card-body h3 { font-size: 1rem; font-weight: 600; }
+.card-body .fw-semibold { color: #333; }
 
 /* ===== CARRITO ===== */
-.carrito-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  padding: 40px 20px;
-  background-color: #fefefe;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.producto-img img {
-  width: 100%;
-  max-width: 300px;
-  border-radius: 8px;
-}
-
-.carrito-detalle {
-  max-width: 400px;
-}
-
-.carrito-detalle h2 {
-  margin-bottom: 16px;
-}
-
-.carrito-detalle p {
-  margin-bottom: 12px;
-}
-
-.carrito-detalle label {
-  display: block;
-  margin-top: 12px;
-}
-
-.carrito-detalle input,
-.carrito-detalle select {
-  width: 100%;
-  padding: 8px;
-  margin-top: 4px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.precio-total {
-  margin-top: 16px;
-  font-weight: bold;
-  font-size: 16px;
-}
-
-.botones {
-  margin-top: 16px;
-  display: flex;
-  gap: 12px;
-}
-
-.botones button {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.botones button:first-child {
-  background-color: #e0e0e0;
-}
-
-.botones button:last-child {
-  background-color: #dcd3ff;
-}
+.carrito-container { background-color: #fff; }
+.precio-total { margin-top: 1rem; font-weight: bold; font-size: 1.1rem; }
 
 /* ===== FOOTER ===== */
-.footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  background-color: #fff;
-  padding: 32px 20px;
-  border-top: 1px solid #ccc;
-  font-size: 14px;
-  flex-wrap: wrap;
-  gap: 32px;
-}
-
-.footer-section {
-  flex: 1;
-  min-width: 200px;
-}
-
-.footer-title {
-  font-weight: bold;
-  margin-bottom: 8px;
-}
-
-.footer-icons {
-  display: flex;
-  gap: 12px;
-  margin-top: 8px;
-}
-
-.footer-icons img {
-  width: 24px;
-  height: 24px;
-}
-
-.footer-section input {
-  padding: 8px;
-  margin-top: 8px;
-  width: 100%;
-  max-width: 220px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.footer-section button {
-  margin-top: 8px;
-  padding: 8px 12px;
-  background-color: #dcd3ff;
-  color: #000;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
+.footer { background-color: #fff; font-size: .9rem; }
+.footer-title { font-weight: bold; margin-bottom: .5rem; }
+.footer-icons img { width: 24px; height: 24px; margin-right: .5rem; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-  .footer {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .footer-section {
-    margin-bottom: 24px;
-  }
-
-  .carrito-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .botones {
-    flex-direction: column;
-  }
-}
-.titulo-logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 16px;
-  position: relative;
-}
-
-.logo-inicio {
-  width: 40px;
-  height: auto;
-  position: absolute;
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.titulo-logo h1 {
-  font-size: 36px;
-  font-weight: bold;
-  text-align: center;
+  .footer { text-align: center; }
+  .botones { flex-direction: column; gap: .5rem; }
 }
 
 
-
-
-
-
-
-
-
-
-.grid-container {
-  display: grid;
-  grid-template-columns: 1fr; /* móvil: una columna */
-  grid-template-rows: auto;
-  grid-template-areas:
-    "header"
-    "inicio"
-    "nosotros"
-    "vinos"
-    "carrito"
-    "footer";
-  gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 10px;
-}
-
-/* Asignación de grid areas a cada sección */
-header {
-  grid-area: header;
-}
-
-#inicio {
-  grid-area: inicio;
-}
-
-#nosotros {
-  grid-area: nosotros;
-}
-
-#vinos {
-  grid-area: vinos;
-}
-
-#carrito {
-  grid-area: carrito;
-}
-
-footer {
-  grid-area: footer;
-}
-
-/* MEDIA QUERY para desktop: dos columnas en algunas secciones */
-@media (min-width: 769px) {
-  .grid-container {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "header header"
-      "inicio inicio"
-      "nosotros vinos"
-      "carrito carrito"
-      "footer footer";
-    padding: 20px 40px;
-  }
-}
