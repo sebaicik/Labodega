@@ -1,3 +1,4 @@
-https://sebaicik.github.io/LaBodega/
+https://sebaicik.github.io/Labodega/
+
 
 
