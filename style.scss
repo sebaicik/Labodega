@@ -1,6 +1,5 @@
-
 // =======================
-// THEME TOKENS
+// VARIABLES
 // =======================
 $theme: light !default; // 'dark' para modo oscuro
 
@@ -25,15 +24,10 @@ $breakpoints: (
   lg: 1024px,
   xl: 1280px
 ) !default;
-```
 
----
-
-## `assets/scss/_mixins.scss`
-```scss
-@use 'variables' as *;
-
-// Media query helper (mobile-first)
+// =======================
+// MIXINS
+// =======================
 @mixin respond($bp, $dir: max) {
   $val: map-get($breakpoints, $bp);
   @if $val {
@@ -43,7 +37,6 @@ $breakpoints: (
   }
 }
 
-// Card shadow + padding
 @mixin card($pad: 1rem) {
   border: 1px solid $border;
   border-radius: $radius;
@@ -53,26 +46,19 @@ $breakpoints: (
   color: $fg;
 }
 
-// Accessible focus ring
 @mixin focus-ring($color: $color-primary) {
   outline: 2px solid transparent;
   outline-offset: 2px;
   &:focus-visible { box-shadow: 0 0 0 3px rgba($color, .35); }
 }
 
-// Fluid clamp font-size
 @mixin fluid-type($min, $max, $vw-min: 360, $vw-max: 1280) {
   font-size: clamp(#{$min}, calc(#{$min} + (#{$max} - #{$min}) * ((100vw - #{$vw-min}px) / (#{$vw-max} - #{$vw-min}))), #{$max});
 }
-```
 
----
-
-## `assets/scss/_placeholders.scss`
-```scss
-@use 'variables' as *;
-@use 'mixins' as *;
-
+// =======================
+// PLACEHOLDERS
+// =======================
 %section-pad { padding: clamp(2rem, 5vw, 4rem) 0; }
 %muted       { color: $color-muted; }
 %elevated    { background: $bg; border: 1px solid $border; border-radius: $radius; }
@@ -80,67 +66,65 @@ $breakpoints: (
 %btn-base {
   display: inline-flex; align-items: center; justify-content: center;
   gap: .5rem; border-radius: $radius; padding: .65rem 1rem; font-weight: 600;
-  border: 1px solid transparent; cursor: pointer; transition: transform .12s ease, box-shadow .12s ease;
+  border: 1px solid transparent; cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease;
   @include focus-ring;
   &:active { transform: translateY(1px); }
 }
-```
 
----
-
-## `assets/scss/base/_reset.scss`
-```scss
+// =======================
+// RESET + BASE
+// =======================
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 img { max-width: 100%; height: auto; display: block; }
-```
-
----
-
-## `assets/scss/base/_typography.scss`
-```scss
-@use '../variables' as *;
-@use '../mixins' as *;
 
 body {
   font-family: $font-family-base;
-  background-color: #f5f7f9; // podés cambiar a $surface si preferís seguir el tema
+  background-color: #f5f7f9;
   color: $fg;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.h1, h1 { @include fluid-type(1.8rem, 2.5rem); font-weight: 800; color: $fg; }
-.h2, h2 { @include fluid-type(1.4rem, 1.8rem); font-weight: 700; color: $fg; }
-.h3, h3 { @include fluid-type(1.1rem, 1.25rem); font-weight: 700; color: $fg; }
-.lead     { color: $color-muted; max-width: 60ch; }
+// =======================
+// TIPOGRAFÍA
+// =======================
+h1 { @include fluid-type(1.8rem, 2.5rem); font-weight: 800; color: $fg; }
+h2 { @include fluid-type(1.4rem, 1.8rem); font-weight: 700; color: $fg; }
+h3 { @include fluid-type(1.1rem, 1.25rem); font-weight: 700; color: $fg; }
+.lead { color: $color-muted; max-width: 60ch; }
 .text-muted { color: $color-muted; }
-```
 
----
+// =======================
+// UTILIDADES DINÁMICAS (@each)
+// =======================
+$swatches: (
+  primary:   $color-primary,
+  secondary: $color-secondary,
+  success:   $color-success,
+  danger:    $color-danger,
+  muted:     $color-muted
+);
 
-## `assets/scss/base/_utilities.scss`
-```scss
-@use '../variables' as *;
-@use '../_placeholders' as *;
+@each $name, $val in $swatches {
+  .text-#{$name} { color: $val !important; }
+  .bg-#{$name}   { background-color: $val !important; }
+  .bd-#{$name}   { border-color: $val !important; }
+}
 
-// Contenedor propio opcional (evita pisar .container de Bootstrap)
+// =======================
+// UTILIDADES GENERALES
+// =======================
 .container-narrow { width: min(1100px, 92%); margin-inline: auto; }
-
-// Secciones
 .section       { @extend %section-pad; background: transparent; }
 .section-muted { @extend %section-pad; background: $surface; }
 .section-title { font-weight: 800; @include fluid-type(1.25rem, 1.75rem); color: $fg; }
-```
 
----
-
-## `assets/scss/components/_navbar.scss`
-```scss
-@use '../variables' as *;
-@use '../mixins' as *;
-
+// =======================
+// NAVBAR
+// =======================
 .navbar {
   background: $bg;
   border-bottom: 1px solid $border;
@@ -153,41 +137,29 @@ body {
     .brand-name { font-weight: 700; color: $fg; text-decoration: none; }
   }
 
-  // Importante: usar .navbar-nav para Bootstrap
   .navbar-nav {
     display: flex; gap: 1rem;
 
     .nav-link {
-      font-weight: 500; color: #000; text-decoration: none; position: relative; padding: .25rem .1rem;
+      font-weight: 500; color: #000; text-decoration: none;
+      padding: .25rem .1rem;
       @include focus-ring;
       &:hover, &:focus { color: $color-primary; }
       &.active { color: $color-primary; }
     }
   }
 }
-```
 
----
+// =======================
+// BOTONES
+// =======================
+.btn { @extend %btn-base; background: $bg; color: $fg; border-color: $border; }
+.btn-primary { @extend %btn-base; background: $color-primary; color: white; &:hover { filter: brightness(.95); } }
+.btn-outline { @extend %btn-base; background: transparent; color: $color-primary; border-color: rgba($color-primary,.45); &:hover { background: rgba($color-primary,.08); } }
 
-## `assets/scss/components/_buttons.scss`
-```scss
-@use '../variables' as *;
-@use '../mixins' as *;
-@use '../_placeholders' as *;
-
-.btn          { @extend %btn-base; background: $bg; color: $fg; border-color: $border; }
-.btn-primary  { @extend %btn-base; background: $color-primary; color: white; &:hover { filter: brightness(.95); } }
-.btn-outline  { @extend %btn-base; background: transparent; color: $color-primary; border-color: rgba($color-primary,.45); &:hover { background: rgba($color-primary,.08); } }
-```
-
----
-
-## `assets/scss/components/_cards.scss`
-```scss
-@use '../variables' as *;
-@use '../mixins' as *;
-@use '../_placeholders' as *;
-
+// =======================
+// CARDS
+// =======================
 .card {
   @extend %card-base;
   transition: transform .15s ease-in-out, box-shadow .15s ease-in-out;
@@ -196,21 +168,44 @@ body {
 
   .card-body {
     display: grid; gap: .5rem;
-    h3   { font-size: 1rem; font-weight: 700; color: $fg; }
+    h3 { font-size: 1rem; font-weight: 700; color: $fg; }
     .fw-semibold { color: $fg; font-weight: 600; }
     .meta { color: $color-muted; font-size: .9rem; }
   }
 }
-```
 
----
+// =======================
+// HERO + ANIMACIÓN
+// =======================
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
 
-## `assets/scss/components/_footer.scss`
-```scss
-@use '../variables' as *;
-@use '../mixins' as *;
-@use '../_placeholders' as *;
+.hero {
+  text-align: center;
 
+  .container { display: grid; gap: 1.25rem; justify-items: center; }
+
+  h1 { @include fluid-type(1.8rem, 2.5rem); font-weight: 800; color: $fg; }
+  .lead { color: $color-muted; }
+
+  .hero-actions { display: flex; gap: .75rem; flex-wrap: wrap; justify-content: center; margin-top: .5rem; }
+
+  .hero-img {
+    max-width: 500px; margin: 0 auto; border-radius: calc($radius + 6px);
+    box-shadow: 0 10px 24px rgba(0,0,0,.08); overflow: hidden;
+    animation: fade-up .6s ease-out both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero .hero-img { animation: none; }
+}
+
+// =======================
+// FOOTER
+// =======================
 .footer {
   background-color: $bg; border-top: 1px solid $border; font-size: .95rem;
 
@@ -234,70 +229,15 @@ body {
 
   .footer-note { color: $color-muted; margin-top: 1rem; font-size: .9rem; }
 }
-```
 
----
-
-## `assets/scss/sections/_hero.scss`
-```scss
-@use '../variables' as *;
-@use '../mixins' as *;
-
-.hero {
-  text-align: center;
-
-  .container { display: grid; gap: 1.25rem; justify-items: center; }
-
-  h1 { @include fluid-type(1.8rem, 2.5rem); font-weight: 800; color: $fg; }
-  .lead { color: $color-muted; }
-
-  .hero-actions { display: flex; gap: .75rem; flex-wrap: wrap; justify-content: center; margin-top: .5rem; }
-
-  .hero-img {
-    max-width: 500px; margin: 0 auto; border-radius: calc($radius + 6px);
-    box-shadow: 0 10px 24px rgba(0,0,0,.08); overflow: hidden;
-  }
+// =======================
+// RESPONSIVE
+// =======================
+@include respond(md) {
+  .botones { flex-direction: column; }
 }
-```
 
----
 
-## `assets/scss/sections/_grid-examples.scss` (opcional, para mostrar maquetado)
-```scss
-@use '../variables' as *;
-@use '../mixins' as *;
-
-// Grilla propia para cards de vinos (si no usás Bootstrap grid en esa sección)
-.vinos-grid {
-  display: grid; grid-template-columns: repeat(12, 1fr); gap: 1rem;
-  .item { grid-column: span 4; }
-  @include respond(lg) { .item { grid-column: span 6; } }
-  @include respond(sm) { .item { grid-column: span 12; } }
-}
-```
-
----
-
-## `assets/scss/style.scss` (archivo principal)
-```scss
-// Import base
-@use 'variables';
-@use 'mixins';
-@use '_placeholders';
-@use 'base/reset';
-@use 'base/typography';
-@use 'base/utilities';
-
-// Components
-@use 'components/navbar';
-@use 'components/buttons';
-@use 'components/cards';
-@use 'components/footer';
-
-// Sections
-@use 'sections/hero';
-@use 'sections/grid-examples'; // opcional
-```
 
 ---
 

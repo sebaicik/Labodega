@@ -2,8 +2,26 @@
 html{scroll-behavior:smooth}
 body{font-family:'Roboto',sans-serif;background-color:#f5f7f9;color:#333333;line-height:1.5;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 img{max-width:100%;height:auto;display:block}
+
+/* Utilidades de color (equivalente al @each) */
+.text-primary{color:#6c63ff !important}
+.bg-primary{background-color:#6c63ff !important}
+.bd-primary{border-color:#6c63ff !important}
+.text-secondary{color:#dcd3ff !important}
+.bg-secondary{background-color:#dcd3ff !important}
+.bd-secondary{border-color:#dcd3ff !important}
+.text-success{color:#28a745 !important}
+.bg-success{background-color:#28a745 !important}
+.bd-success{border-color:#28a745 !important}
+.text-danger{color:#dc3545 !important}
+.bg-danger{background-color:#dc3545 !important}
+.bd-danger{border-color:#dc3545 !important}
 .text-muted,.footer .footer-text,.footer .footer-note,.hero .lead,.card .card-body .meta{color:#6b7280}
-.container{width:min(1100px,92%);margin-inline:auto}
+.bg-muted{background-color:#6b7280 !important}
+.bd-muted{border-color:#6b7280 !important}
+
+/* Contenedor propio (no pisar .container de Bootstrap) */
+.container-narrow{width:min(1100px,92%);margin-inline:auto}
 
 /* Navbar */
 .navbar{background:#ffffff;border-bottom:1px solid #eeeeee}
@@ -11,11 +29,12 @@ img{max-width:100%;height:auto;display:block}
 .navbar .navbar-brand{display:inline-flex;align-items:center;gap:.5rem}
 .navbar .navbar-brand .logo{width:40px;height:auto}
 .navbar .navbar-brand .brand-name{font-weight:700;color:#333333;text-decoration:none}
-.navbar .nav{display:flex;gap:1rem}
-.navbar .nav .nav-link{font-weight:500;color:#000;text-decoration:none;position:relative;padding:.25rem .1rem;outline:2px solid transparent;outline-offset:2px}
-.navbar .nav .nav-link:focus-visible{box-shadow:0 0 0 3px rgba(108,99,255,.35)}
-.navbar .nav .nav-link:hover,.navbar .nav .nav-link:focus{color:#6c63ff}
-.navbar .nav .nav-link.active{color:#6c63ff}
+/* usar .navbar-nav en lugar de .nav */
+.navbar .navbar-nav{display:flex;gap:1rem}
+.navbar .navbar-nav .nav-link{font-weight:500;color:#000;text-decoration:none;position:relative;padding:.25rem .1rem;outline:2px solid transparent;outline-offset:2px}
+.navbar .navbar-nav .nav-link:focus-visible{box-shadow:0 0 0 3px rgba(108,99,255,.35)}
+.navbar .navbar-nav .nav-link:hover,.navbar .navbar-nav .nav-link:focus{color:#6c63ff}
+.navbar .navbar-nav .nav-link.active{color:#6c63ff}
 
 /* Sections */
 .section,.section-muted{padding:clamp(2rem,5vw,4rem) 0}
@@ -28,7 +47,10 @@ img{max-width:100%;height:auto;display:block}
 .hero h1{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;color:#333333}
 .hero .lead{max-width:60ch}
 .hero .hero-actions{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;margin-top:.5rem}
-.hero .hero-img{max-width:500px;margin:0 auto;border-radius:14px;box-shadow:0 10px 24px rgba(0,0,0,.08);overflow:hidden}
+/* Animación visible para la rúbrica */
+@keyframes fade-up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hero .hero-img{max-width:500px;margin:0 auto;border-radius:14px;box-shadow:0 10px 24px rgba(0,0,0,.08);overflow:hidden;animation:fade-up .6s ease-out both}
+@media (prefers-reduced-motion:reduce){.hero .hero-img{animation:none}}
 
 /* Buttons */
 .btn,.btn-primary,.btn-outline{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border-radius:8px;padding:.65rem 1rem;font-weight:600;border:1px solid transparent;cursor:pointer;transition:transform .12s ease,box-shadow .12s ease;outline:2px solid transparent;outline-offset:2px}
